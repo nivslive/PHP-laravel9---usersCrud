@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -15,7 +14,7 @@ class UserController extends Controller
      */
     public function index():Array
     {
-        return DB::select('select * from users');
+        return DB::select('SELECT name, email FROM users');
     }
 
     /**
@@ -36,8 +35,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        return DB::table('users')->where('id', $id)->get();
     }
 
     /**
@@ -69,8 +68,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        return DB::table('users')->delete($request->id);
     }
 }
