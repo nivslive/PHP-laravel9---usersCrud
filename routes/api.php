@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/test',  [UserController::class, 'index']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::put('/update', [UserController::class, 'update']);
 Route::delete('/delete', [UserController::class, 'delete']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

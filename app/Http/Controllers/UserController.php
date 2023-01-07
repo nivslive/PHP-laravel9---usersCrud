@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -57,9 +58,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+    public function update(Request $request, User $user)
     {
-        //
+        try { 
+            return DB::table('users')
+              ->where('id',  '=' , $request->id )
+              ->update([
+                'email' => $request->email, 
+                'name' => $request->name, 
+              ]);
+          } catch(\Illuminate\Database\QueryException $ex){ 
+              return ['error' => 'error update user']; 
+          }
     }
 
     /**
