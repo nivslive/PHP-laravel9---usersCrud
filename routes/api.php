@@ -20,11 +20,12 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 
-Route::get('/test',  [UserController::class, 'index']);
-Route::post('/show', [UserController::class, 'show']);
-Route::post('/edit', [UserController::class, 'edit']);
-Route::put('/update', [UserController::class, 'update']);
-Route::delete('/delete', [UserController::class, 'delete']);
-Route::middleware('auth:api')->group(function () {
 
+Route::middleware('auth:api')->group(function () {
+    Route::get('/test',  [UserController::class, 'index']);
+    Route::post('/show', [UserController::class, 'show']);
+    Route::post('/edit', [UserController::class, 'edit']);
+    Route::post('/edit-email', [UserController::class, 'email']);
+    Route::put('/update', [UserController::class, 'update']);
+    Route::delete('/delete', [UserController::class, 'delete']);
 });

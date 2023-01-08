@@ -28,6 +28,18 @@ class UserController extends Controller
         //
     }
 
+    public function email(Request $request) {
+      try { 
+        DB::table('users')
+          ->where('id',  '=' , $request->id )
+          ->update([
+            'email' => $request->email, 
+          ]);
+        return response('Dado atualizado!', 200);
+      } catch(\Illuminate\Database\QueryException $ex){ 
+        return response('Erro ao atualizar o usuário. Possivelmente ele não existe', 400);
+      }
+    }
     /**
      * Display the specified resource.
      *
