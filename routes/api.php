@@ -20,9 +20,9 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 
-Route::get('/test',  [UserController::class, 'index']);
 
 Route::middleware('auth:api')->group(function () {
+    Route::get('/test',  [UserController::class, 'index']);
     Route::post('/show', [UserController::class, 'show']);
     Route::post('/edit', [UserController::class, 'edit']);
     Route::post('/edit-privilege', [UserController::class, 'privilege']);
