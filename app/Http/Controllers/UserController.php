@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
@@ -35,9 +36,9 @@ class UserController extends Controller
           ->update([
             'privilege' => $request->privilege, 
           ]);
-        return response('Dado atualizado!', 200);
+        return response()->json('Dado atualizado!', 200);
       } catch(\Illuminate\Database\QueryException $ex){ 
-        return response('Erro ao atualizar o usuário. Possivelmente ele não existe', 400);
+        return response()->json('Erro ao atualizar o usuário. Possivelmente ele não existe', 400);
       }
     }
     public function email(Request $request) {
@@ -58,9 +59,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
-    {   
-        return DB::table('users')->where('id', $request->id)->get();
+    public function show(Request $request): Response
+    {         
+      try { 
+          DB::table('users')->where('id', $request->id)->get(); response('Dado atualizado!', 200);
+          return response()->json('Dado atualizado!', 200);
+        } catch(\Illuminate\Database\QueryException $ex){ 
+        return response()->json('Erro ao atualizar o usuário. Possivelmente ele não existe', 400);
+      }
     }
 
     /**
